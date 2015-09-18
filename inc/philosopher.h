@@ -6,7 +6,7 @@
 /*   By: jripoute <jripoute@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 18:03:54 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/17 19:50:32 by jripoute         ###   ########.fr       */
+/*   Updated: 2015/09/18 01:42:42 by jripoute         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ ________________________________________________________________________________
 # include <stdio.h>
 # include "libft.h"
 
-# include <GLUT/glut.h>
 # define GLFW_INCLUDE_GLU
+# include <GLUT/glut.h>
 # include <GLFW/glfw3.h>
 
 # define MAX_LIFE 10			// philo lifes
@@ -99,15 +99,21 @@ ________________________________________________________________________________
 # define REST_T 9 * SEC			// time to rest
 # define THINK_T 6 * SEC  		// think time
 # define TIMEOUT 200	 		// time of game
-
-/*_______STATUS_______*/
 # define EATING  1
 # define SLEEPING 2
 # define THINKING 3
 # define DEAD -1
 
+// OpenGL Define
+# define WIDTH 1280
+# define HEIGHT 960
+// Object Define
+# define TABLE_HEIGHT 1.5
+# define TABLE_BASE 1
+
 typedef enum			s_err
 {
+	CREATE_WINDOW,
 	PTHREAD_MUTEX_INIT,
 	PTHREAD_CREATE,
 }						t_err;
@@ -121,6 +127,19 @@ typedef struct			s_philo
 	int					stick;
 	pthread_mutex_t		mutex_stick;
 }						t_philo;
+
+typedef struct			s_win
+{
+	GLFWwindow			*ptr;
+	int					width;
+	int					height;
+}						t_win;
+
+/*
+** Init.c
+*/
+GLFWwindow				*init_window(void);
+
 
 /*
 ** Main.c
