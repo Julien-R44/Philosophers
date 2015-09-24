@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jripoute <jripoute@student.42.fr>          +#+  +:+       +#+        */
+/*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 18:03:54 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/18 01:42:42 by jripoute         ###   ########.fr       */
+/*   Updated: 2015/09/24 03:02:13 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,19 +127,6 @@ typedef struct			s_philo
 	int					stick;
 	pthread_mutex_t		mutex_stick;
 }						t_philo;
-
-typedef struct			s_win
-{
-	GLFWwindow			*ptr;
-	int					width;
-	int					height;
-}						t_win;
-
-/*
-** Init.c
-*/
-GLFWwindow				*init_window(void);
-
 
 /*
 ** Main.c

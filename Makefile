@@ -15,8 +15,7 @@ INCDIR	= ./inc/
 SRCS	= $(addprefix $(SRCDIR), $(SRC))
 OBJS	= $(addprefix $(OBJDIR), $(OBJ))
 INCS	= $(addprefix $(INCDIR), $(INC))
-LIBFLAG = -L./libft/ -lft -L./glfw/src/ -lglfw3 -framework Cocoa -framework OpenGL \
-			-framework IOKit -framework CoreVideo -framework GLUT
+
 LDFLAGS	= -I./inc/ -I./libft/include/ -I./glfw/include/
 
 .SILENT:
