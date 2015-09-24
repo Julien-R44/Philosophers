@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jripoute <jripoute@student.42.fr>          +#+  +:+       +#+        */
+/*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/11 00:37:35 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/17 00:20:53 by jripoute         ###   ########.fr       */
+/*   Updated: 2015/09/24 06:15:53 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	*func_th(void *arg)
 	t_philo *philo;
 	t_philo *next_philo;
 
+
 	head = ft_global(NULL);
 	list = head;
 	while (((t_philo *)list->content)->name != ft_atoi(arg))
@@ -73,6 +74,7 @@ void	*func_th(void *arg)
 		usleep((get_random() * SEC) / 10);
 		if (func2_th(philo, next_philo))
 		{
+
 			philo->statut = EATING;
 			philo->life = MAX_LIFE;
 			printf("philo %d eat life = %d\n", philo->name, philo->life);

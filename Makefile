@@ -3,7 +3,7 @@ DEBUG	= yes
 ifeq ($(DEBUG),no)
 	FLAGS= -Wall -Wextra -Werror
 else
-	FLAGS= -g -std=c99 -Wno-deprecated
+	FLAGS= -g -std=gnu99 -Wno-deprecated
 endif
 SRC		= \
 			main.c thread.c misc.c init.c
@@ -15,7 +15,7 @@ INCDIR	= ./inc/
 SRCS	= $(addprefix $(SRCDIR), $(SRC))
 OBJS	= $(addprefix $(OBJDIR), $(OBJ))
 INCS	= $(addprefix $(INCDIR), $(INC))
-
+LIBFLAG = -L./libft/ -lft -lpthread -lSDL -lSDL_image
 LDFLAGS	= -I./inc/ -I./libft/include/ -I./glfw/include/
 
 .SILENT:
@@ -34,10 +34,6 @@ else
 	echo "\\033[1;31mCompilation with -Wall -Wextra -Werror...\\033[0;39m"
 endif
 	echo "\\033[1;34mGenerating objects... Please wait.\\033[0;39m"
-	# git submodule init
-	# git submodule update
-	# cd glfw/ ; ~/.brew/bin/cmake .
-	# make -C glfw/
 	gcc $(FLAGS) -c $(SRCS) $(LDFLAGS)
 	mkdir -p $(OBJDIR)
 	mv $(OBJ) $(OBJDIR)

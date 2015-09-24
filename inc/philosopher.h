@@ -6,7 +6,7 @@
 /*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 18:03:54 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/24 03:02:13 by y0ja             ###   ########.fr       */
+/*   Updated: 2015/09/24 06:19:21 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,28 @@ ________________________________________________________________________________
 # include <pthread.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <SDL/SDL.h>
+# include <SDL/SDL_image.h>
 # include "libft.h"
 
-# define GLFW_INCLUDE_GLU
-# include <GLUT/glut.h>
-# include <GLFW/glfw3.h>
-
+// Defines
 # define MAX_LIFE 10			// philo lifes
 # define SEC 1000000            // 1seconde for usleep
-# define EAT_T 10  * SEC   		// eat time
-# define REST_T 9 * SEC			// time to rest
-# define THINK_T 6 * SEC  		// think time
+# define EAT_T 1  * SEC   		// eat time
+# define REST_T 1 * SEC			// time to rest
+# define THINK_T 1 * SEC  		// think time
 # define TIMEOUT 200	 		// time of game
+
+// Status
 # define EATING  1
 # define SLEEPING 2
 # define THINKING 3
 # define DEAD -1
 
 // OpenGL Define
-# define WIDTH 1280
-# define HEIGHT 960
+# define WWIN 560
+# define HWIN 272
+
 // Object Define
 # define TABLE_HEIGHT 1.5
 # define TABLE_BASE 1
@@ -116,6 +118,7 @@ typedef enum			s_err
 	CREATE_WINDOW,
 	PTHREAD_MUTEX_INIT,
 	PTHREAD_CREATE,
+	IMG_LOAD,
 }						t_err;
 
 typedef struct			s_philo
@@ -128,10 +131,29 @@ typedef struct			s_philo
 	pthread_mutex_t		mutex_stick;
 }						t_philo;
 
+typedef struct	s_sprite
+{
+	SDL_Surface	*img;
+	SDL_Rect	pos;
+	SDL_Rect	clip[5];
+}				t_sprite;
+
+typedef struct	s_all
+{
+	SDL_Surface *win;
+	SDL_Surface *bg[7];
+	SDL_Rect	pos;
+	t_sprite	naruto;
+	t_sprite	sasuke;
+}				t_all;
+
+SDL_Surface		*init_window(void);
+
+
 /*
 ** Main.c
 */
-void					ft_hungry(t_dlist *list);
+// void					ft_hungry(t_dlist *list);
 
 /*
 ** Thread.c
@@ -146,6 +168,7 @@ void					*time_func(void *name);
 int						get_random(void);
 t_dlist					*ft_global(t_dlist *list);
 void					ft_error(int er);
+void					SDL_Blit2(SDL_Surface *src, SDL_Surface *dst, int x, int y, SDL_Rect *clip);
 
 
 #endif
