@@ -6,40 +6,12 @@
 /*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/11 00:37:35 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/24 06:15:53 by y0ja             ###   ########.fr       */
+/*   Updated: 2015/09/25 06:44:51 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "philosopher.h"
-
-void	*time_func(void *list)
-{
-	int			time_out;
-	t_dlist		*nav;
-
-	nav = list;
-	time_out = TIMEOUT;
-	while (time_out)
-	{
-		printf("\n--time : %d--\n", time_out);
-		nav = list;
-		while (nav != NULL)
-		{
-			if (((t_philo *)nav->content)->statut == DEAD)
-			{
-				printf("%d is dead\n", ((t_philo *)nav->content)->name);
-				exit(0);
-			}
-			nav = nav->next;
-		}
-		usleep(SEC);
-		time_out--;
-	}
-	printf("TIMEOUT: time to dance\n");
-	exit(EXIT_SUCCESS);
-	return (NULL);
-}
 
 int		func2_th(t_philo *philo, t_philo *next_philo)
 {
@@ -47,7 +19,6 @@ int		func2_th(t_philo *philo, t_philo *next_philo)
 		return (0);
 	if (!pthread_mutex_trylock(&philo->mutex_stick) && !pthread_mutex_trylock(&next_philo->mutex_stick))
 	{
-		philo->statut = EATING;
 		philo->stick = 0;
 		next_philo->stick = 0;
 		return (1);
@@ -74,14 +45,13 @@ void	*func_th(void *arg)
 		usleep((get_random() * SEC) / 10);
 		if (func2_th(philo, next_philo))
 		{
-
 			philo->statut = EATING;
 			philo->life = MAX_LIFE;
-			printf("philo %d eat life = %d\n", philo->name, philo->life);
 			usleep(EAT_T);
 			philo->statut = SLEEPING;
 			philo->stick = 1;
 			next_philo->stick = 1;
+			philo->statut = RESTING;
 			usleep(REST_T);
 		}
 		pthread_mutex_unlock(&philo->mutex_stick);

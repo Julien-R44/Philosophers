@@ -6,7 +6,7 @@ else
 	FLAGS= -g -std=gnu99 -Wno-deprecated
 endif
 SRC		= \
-			main.c thread.c misc.c init.c
+			main.c thread.c misc.c init.c init_philo.c init_graphics.c hook.c
 
 OBJ		= $(SRC:.c=.o)
 SRCDIR	= ./src/
@@ -15,7 +15,7 @@ INCDIR	= ./inc/
 SRCS	= $(addprefix $(SRCDIR), $(SRC))
 OBJS	= $(addprefix $(OBJDIR), $(OBJ))
 INCS	= $(addprefix $(INCDIR), $(INC))
-LIBFLAG = -L./libft/ -lft -lpthread -lSDL -lSDL_image
+LIBFLAG = -L./libft/ -lft -lpthread -lSDL -lSDL_image -lSDL_ttf
 LDFLAGS	= -I./inc/ -I./libft/include/ -I./glfw/include/
 
 .SILENT:

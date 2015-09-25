@@ -6,7 +6,7 @@
 /*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 18:03:54 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/24 06:19:21 by y0ja             ###   ########.fr       */
+/*   Updated: 2015/09/25 06:45:03 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,19 @@ ________________________________________________________________________________
 # include <stdio.h>
 # include <SDL/SDL.h>
 # include <SDL/SDL_image.h>
+# include <SDL/SDL_ttf.h>
 # include "libft.h"
 
 // Defines
 # define MAX_LIFE 10			// philo lifes
 # define SEC 1000000            // 1seconde for usleep
-# define EAT_T 1  * SEC   		// eat time
-# define REST_T 1 * SEC			// time to rest
+# define EAT_T 2  * SEC   		// eat time
+# define REST_T 5 * SEC			// time to rest
 # define THINK_T 1 * SEC  		// think time
-# define TIMEOUT 200	 		// time of game
+# define TIMEOUT 100		 		// time of game
 
 // Status
+# define RESTING 0
 # define EATING  1
 # define SLEEPING 2
 # define THINKING 3
@@ -113,42 +115,71 @@ ________________________________________________________________________________
 # define TABLE_HEIGHT 1.5
 # define TABLE_BASE 1
 
-typedef enum			s_err
+typedef enum		s_err
 {
+	SYSCALL,
 	CREATE_WINDOW,
 	PTHREAD_MUTEX_INIT,
 	PTHREAD_CREATE,
 	IMG_LOAD,
-}						t_err;
+}					t_err;
 
-typedef struct			s_philo
+typedef struct		s_philo
 {
-	pthread_t			th;
-	int					name;
-	int					life;
-	int					statut;
-	int					stick;
-	pthread_mutex_t		mutex_stick;
-}						t_philo;
+	pthread_t		th;
+	int				name;
+	int				life;
+	int				statut;
+	int				stick;
+	pthread_mutex_t	mutex_stick;
+}					t_philo;
 
-typedef struct	s_sprite
+typedef struct	s_text
 {
-	SDL_Surface	*img;
-	SDL_Rect	pos;
-	SDL_Rect	clip[5];
-}				t_sprite;
+	TTF_Font	*font;
+	SDL_Color	color;
+}				t_text;
 
-typedef struct	s_all
+typedef struct		s_sprite
 {
-	SDL_Surface *win;
-	SDL_Surface *bg[7];
-	SDL_Rect	pos;
-	t_sprite	naruto;
-	t_sprite	sasuke;
-}				t_all;
+	SDL_Surface		*img;
+	SDL_Surface		*bar;
+	SDL_Rect		pos;
+	SDL_Rect		clip[6];
+}					t_sprite;
+
+typedef struct		s_all
+{
+	SDL_Surface 	*win;
+	SDL_Surface 	*bg[7];
+	SDL_Rect		pos;
+	SDL_Surface		*rect_bar;
+	t_sprite		naruto;
+	t_sprite		sasuke;
+	t_sprite		sakura;
+	t_sprite		neji;
+	t_sprite		kakashi;
+	t_sprite		lee;
+	t_text			text;
+}					t_all;
 
 SDL_Surface		*init_window(void);
+void	display_all(t_all *all, t_dlist *list);
+void	main_loop(t_dlist *list, t_all *all);
 
+int		fps_system(t_dlist *list);
+
+
+/*
+** init_graphics.c
+*/
+void					init_graphics(t_all *all);
+
+/*
+** init_philo.c
+*/
+t_dlist					*init_philo_list(void);
+void					create_thread(t_dlist *list);
 
 /*
 ** Main.c
