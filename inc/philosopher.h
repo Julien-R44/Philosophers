@@ -6,7 +6,7 @@
 /*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 18:03:54 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/25 06:45:03 by y0ja             ###   ########.fr       */
+/*   Updated: 2015/09/26 00:32:29 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,10 @@ ________________________________________________________________________________
 # define THINKING 3
 # define DEAD -1
 
-// OpenGL Define
+// Graphics Define
+# define FRAMERATE 110
 # define WWIN 560
 # define HWIN 272
-
-// Object Define
-# define TABLE_HEIGHT 1.5
-# define TABLE_BASE 1
 
 typedef enum		s_err
 {
@@ -154,12 +151,14 @@ typedef struct		s_all
 	SDL_Surface 	*bg[7];
 	SDL_Rect		pos;
 	SDL_Surface		*rect_bar;
+	t_sprite		*sprites;
 	t_sprite		naruto;
 	t_sprite		sasuke;
 	t_sprite		sakura;
 	t_sprite		neji;
 	t_sprite		kakashi;
 	t_sprite		lee;
+	t_sprite		orochimaru;
 	t_text			text;
 }					t_all;
 

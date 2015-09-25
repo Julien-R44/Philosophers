@@ -6,7 +6,7 @@ else
 	FLAGS= -g -std=gnu99 -Wno-deprecated
 endif
 SRC		= \
-			main.c thread.c misc.c init.c init_philo.c init_graphics.c hook.c
+			main.c thread.c misc.c init.c init_philo.c init_graphics.c hook.c display.c
 
 OBJ		= $(SRC:.c=.o)
 SRCDIR	= ./src/
@@ -22,12 +22,12 @@ LDFLAGS	= -I./inc/ -I./libft/include/ -I./glfw/include/
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INCS)
+$(NAME): $(OBJS)
 	make -C libft/
 	gcc $(FLAGS) -o $@ $^ $(LIBFLAG)
 	echo "\\033[1;32mSuccess.\\033[0;39m"
 
-$(OBJS): $(SRCS)
+$(OBJS): $(SRCS) ./inc/philosopher.h
 ifeq ($(DEBUG),yes)
 	echo "\\033[1;31mDEBUG COMPILATION.. (no flags except -g)\\033[0;39m"
 else
