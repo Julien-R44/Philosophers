@@ -6,7 +6,8 @@ else
 	FLAGS= -g -std=gnu99 -Wno-deprecated
 endif
 SRC		= \
-			main.c thread.c misc.c init.c init_philo.c init_graphics.c hook.c display.c
+			main.c thread.c misc.c init.c init_philo.c init_graphics.c hook.c display.c \
+			cut_sheets.c
 
 OBJ		= $(SRC:.c=.o)
 SRCDIR	= ./src/

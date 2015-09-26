@@ -6,7 +6,7 @@
 /*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 18:03:54 by skhatir           #+#    #+#             */
-/*   Updated: 2015/09/26 00:32:29 by y0ja             ###   ########.fr       */
+/*   Updated: 2015/09/26 04:00:59 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef enum		s_err
 	PTHREAD_MUTEX_INIT,
 	PTHREAD_CREATE,
 	IMG_LOAD,
+	FONT_ERR,
 }					t_err;
 
 typedef struct		s_philo
@@ -152,22 +153,20 @@ typedef struct		s_all
 	SDL_Rect		pos;
 	SDL_Surface		*rect_bar;
 	t_sprite		*sprites;
-	t_sprite		naruto;
-	t_sprite		sasuke;
-	t_sprite		sakura;
-	t_sprite		neji;
-	t_sprite		kakashi;
-	t_sprite		lee;
-	t_sprite		orochimaru;
 	t_text			text;
+	int				timeleft;
+	SDL_Surface		*heal;
 }					t_all;
 
 SDL_Surface		*init_window(void);
 void	display_all(t_all *all, t_dlist *list);
 void	main_loop(t_dlist *list, t_all *all);
 
-int		fps_system(t_dlist *list);
+void	cut_sheets(t_sprite *naruto, t_sprite *sasuke, t_sprite *sakura, t_sprite *neji, t_sprite *kakashi);
+void	cut_sheets2(t_sprite *lee, t_sprite *orochimaru);
 
+void	remove_life(t_dlist *list);
+void	analyse(t_dlist *list);
 
 /*
 ** init_graphics.c

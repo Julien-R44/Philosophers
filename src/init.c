@@ -6,7 +6,7 @@
 /*   By: y0ja <y0ja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/17 20:40:04 by jripoute          #+#    #+#             */
-/*   Updated: 2015/09/25 00:03:21 by y0ja             ###   ########.fr       */
+/*   Updated: 2015/09/26 02:30:48 by y0ja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,4 @@ SDL_Surface		*init_window(void)
 	SDL_FillRect(win, NULL, SDL_MapRGB(win->format, 10, 120, 236));
 	return (win);
 }
+
